@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">TP1</string>
+
+    <string name="Red">Red</string>
+    <string name="Blue">Green</string>
+    <string name="Green">Blue</string>
+    <string name="Yellow">Yellow</string>
+    <string name="Black">Black</string>
+    <string name="Gray">Gray</string>
+    <string name="Magenta">Magenta</string>
+    <string name="Pink">Pink</string>
 </resources>
