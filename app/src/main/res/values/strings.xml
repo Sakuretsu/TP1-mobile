@@ -9,4 +9,6 @@
     <string name="Black">Black</string>
     <string name="Purple">Purple</string>
     <string name="Pink">Pink</string>
+
+    <string name="Question">What's this color?</string>
 </resources>
