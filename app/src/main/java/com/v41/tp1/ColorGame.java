@@ -33,7 +33,7 @@ public class ColorGame {
         colorToFind = colorDisplayNames[rn.nextInt(colorDisplayNames.length)];
     }
 
-    public boolean CompareSelection(int pushedButtonColorCode){
+    public boolean SelectionIsRight(int pushedButtonColorCode){
         return colorToFind == pushedButtonColorCode;
     }
 }

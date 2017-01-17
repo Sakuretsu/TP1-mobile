@@ -2,13 +2,13 @@
     <string name="app_name">TP1</string>
 
     <string name="Red">Red</string>
-    <string name="Blue">Green</string>
-    <string name="Green">Blue</string>
+    <string name="Blue">Blue</string>
+    <string name="Green">Green</string>
     <string name="Orange">Orange</string>
     <string name="Brown">Brown</string>
     <string name="Black">Black</string>
     <string name="Purple">Purple</string>
     <string name="Pink">Pink</string>
 
-    <string name="Question">What's this color?</string>
+    <string name="Question">What\'s this color?</string>
 </resources>
