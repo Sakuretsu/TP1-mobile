@@ -9,7 +9,28 @@ import android.support.annotation.StringRes;
 
 public class ColorItem {
     @StringRes
-    public int name;
+    private int name;
     @ColorRes
-    public int color;
+    private int color;
+
+    public ColorItem(int color, int name) {
+        this.color = color;
+        this.name = name;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
+        this.name = name;
+    }
 }

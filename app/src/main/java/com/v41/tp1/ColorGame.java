@@ -16,20 +16,38 @@ public class ColorGame {
 
     private int colorToFind;
     private int[] colorDisplayNames;
+    private int[] displayedColors;
+
+    public int[] getColorDisplayNames() {
+        return colorDisplayNames;
+    }
+
+    public int getColorToFind() {
+        return colorToFind;
+    }
+
+    public ColorItem[] getColorItems() {
+        return colorItems;
+    }
 
     private ColorItem[] colorItems;
 
     public ColorGame(ColorItem[] colorItems){
         this.colorItems = colorItems;
         colorDisplayNames = new int[4];
+        displayedColors = new int[4];
     }
 
-    public void StartNewGame(){
+    public void startNewGame(){
         Collections.shuffle(Arrays.asList(colorItems));
-        for(int i = 0; i<colorDisplayNames.length; i++){
-             colorDisplayNames[i] = colorItems[i].name;
-        }
         Random rn = new Random();
+        for(int i = 0; i<colorDisplayNames.length; i++){
+            colorDisplayNames[i] = colorItems[i].getName();
+            displayedColors[i] = -1;
+            while (displayedColors[i] == -1 || displayedColors[i] == colorItems[i].getColor()){
+                displayedColors[i] = colorItems[rn.nextInt(colorItems.length)].getColor();
+            }
+        }
         colorToFind = colorDisplayNames[rn.nextInt(colorDisplayNames.length)];
     }
 
