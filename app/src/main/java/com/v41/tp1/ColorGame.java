@@ -1,9 +1,5 @@
 package com.v41.tp1;
 
-import android.graphics.Color;
-import android.support.annotation.ColorRes;
-import android.support.annotation.StringRes;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -18,6 +14,32 @@ public class ColorGame {
     private int colorToFind;
     private int[] colorDisplayNames;
     private int[] displayedColors;
+
+    private final int BUTTON_CHOICE_NUMBERS = 4;
+
+    public void setColorDisplayNames(int[] colorDisplayNames) {
+        this.colorDisplayNames = colorDisplayNames;
+    }
+
+    public void setColorToFind(int colorToFind) {
+        this.colorToFind = colorToFind;
+    }
+
+    public int getCorrectButtonIndex() {
+        return correctButtonIndex;
+    }
+
+    public void setCorrectButtonIndex(int correctButtonIndex) {
+        this.correctButtonIndex = correctButtonIndex;
+    }
+
+    public int[] getDisplayedColors() {
+        return displayedColors;
+    }
+
+    public void setDisplayedColors(int[] displayedColors) {
+        this.displayedColors = displayedColors;
+    }
 
     public int[] getColorDisplayNames() {
         return colorDisplayNames;
@@ -35,8 +57,17 @@ public class ColorGame {
 
     public ColorGame(ColorItem[] colorItems){
         this.colorItems = colorItems;
-        colorDisplayNames = new int[4];
-        displayedColors = new int[4];
+        colorDisplayNames = new int[BUTTON_CHOICE_NUMBERS];
+        displayedColors = new int[BUTTON_CHOICE_NUMBERS];
+    }
+
+    public ColorGame(int numberOfColors){
+        colorDisplayNames = new int[BUTTON_CHOICE_NUMBERS];
+        displayedColors = new int[BUTTON_CHOICE_NUMBERS];
+        colorItems = new ColorItem[numberOfColors];
+        for(int i = 0; i<numberOfColors; i++){
+            colorItems[i] = new ColorItem();
+        }
     }
 
     public void startNewGame(){
@@ -56,6 +87,4 @@ public class ColorGame {
     public boolean SelectionIsRight(int pushedButtonIndex){
         return pushedButtonIndex == correctButtonIndex;
     }
-
-
 }

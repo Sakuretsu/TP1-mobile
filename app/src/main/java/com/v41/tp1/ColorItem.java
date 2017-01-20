@@ -18,6 +18,10 @@ public class ColorItem {
         this.name = name;
     }
 
+    public ColorItem(){
+
+    }
+
     public int getColor() {
         return color;
     }

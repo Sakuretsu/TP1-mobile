@@ -18,7 +18,14 @@ public class GameActivity extends AppCompatActivity {
     MediaPlayer correctAnswerSoundPlayer;
     MediaPlayer incorrectAnswerSoundPlayer;
 
+    private final String CORRECT_ANSWER = "CORRECT_ANSWER";
+    private final String CORRECT_BUTTON_INDEX = "CORRECT_BUTTON_INDEX";
+    private final String COLOR_DISPLAY_NAMES = "COLOR_DISPLAY_NAMES";
+    private final String DISPLAYED_COLORS = "DISPLAYED_COLORS";
+    private final String COLOR_ITEM_NAME = "COLOR_ITEM_NAME";
+    private final String COLOR_ITEM_COLOR = "COLOR_ITEM_COLOR";
 
+    private final int TOTAL_NUMBER_OF_COLORS = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,6 @@ public class GameActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //view.getId()
                     for (int i = 0; i< colorButtons.length; i++){
                         if (colorButtons[i].getId() == v.getId()){
                             if(game.SelectionIsRight(i)){
@@ -53,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
-        ColorItem[] colorItems = new ColorItem[8];
+        ColorItem[] colorItems = new ColorItem[TOTAL_NUMBER_OF_COLORS];
         colorItems[0] = new ColorItem(R.color.Red,R.string.Red);
         colorItems[1] = new ColorItem(R.color.Green,R.string.Green);
         colorItems[2] = new ColorItem(R.color.Blue,R.string.Blue);
@@ -64,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
         colorItems[7] = new ColorItem(R.color.Pink,R.string.Pink);
 
         game = new ColorGame(colorItems);
+        game.startNewGame();
+        UpdateButtonTextAndColor();
     }
 
     private void UpdateButtonTextAndColor(){
@@ -76,19 +84,34 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        game.startNewGame();
-        UpdateButtonTextAndColor();
         }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(CORRECT_ANSWER,game.getColorToFind());
+        outState.putInt(CORRECT_BUTTON_INDEX,game.getCorrectButtonIndex());
+        outState.putIntArray(COLOR_DISPLAY_NAMES,game.getColorDisplayNames());
+        outState.putIntArray(DISPLAYED_COLORS,game.getDisplayedColors());
+        for (int i = 0; i< TOTAL_NUMBER_OF_COLORS; i++){
+            outState.putInt(COLOR_ITEM_NAME + i,game.getColorItems()[i].getName());
+            outState.putInt(COLOR_ITEM_COLOR + i,game.getColorItems()[i].getColor());
+        }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        game = new ColorGame(TOTAL_NUMBER_OF_COLORS);
+        game.setColorToFind(savedInstanceState.getInt(CORRECT_ANSWER));
+        game.setCorrectButtonIndex(savedInstanceState.getInt(CORRECT_BUTTON_INDEX));
+        game.setColorDisplayNames(savedInstanceState.getIntArray(COLOR_DISPLAY_NAMES));
+        game.setDisplayedColors(savedInstanceState.getIntArray(DISPLAYED_COLORS));
+        for (int i = 0; i< game.getColorItems().length; i++){
+            game.getColorItems()[i].setName(savedInstanceState.getInt(COLOR_ITEM_NAME+i));
+            game.getColorItems()[i].setColor(savedInstanceState.getInt(COLOR_ITEM_COLOR+i));
+        }
+        UpdateButtonTextAndColor();
     }
 }
 
