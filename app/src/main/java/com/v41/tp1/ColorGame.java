@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class ColorGame {
 
+    private int correctButtonIndex;
     private int colorToFind;
     private int[] colorDisplayNames;
     private int[] displayedColors;
@@ -48,10 +49,13 @@ public class ColorGame {
                 displayedColors[i] = colorItems[rn.nextInt(colorItems.length)].getColor();
             }
         }
-        colorToFind = colorDisplayNames[rn.nextInt(colorDisplayNames.length)];
+        correctButtonIndex = rn.nextInt(colorDisplayNames.length);
+        colorToFind = colorItems[correctButtonIndex].getColor();
     }
 
-    public boolean SelectionIsRight(int pushedButtonColorCode){
-        return colorToFind == pushedButtonColorCode;
+    public boolean SelectionIsRight(int pushedButtonIndex){
+        return pushedButtonIndex == correctButtonIndex;
     }
+
+
 }
