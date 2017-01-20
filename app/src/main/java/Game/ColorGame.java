@@ -1,4 +1,4 @@
-package com.v41.tp1;
+package Game;
 
 import java.util.Arrays;
 import java.util.Collections;

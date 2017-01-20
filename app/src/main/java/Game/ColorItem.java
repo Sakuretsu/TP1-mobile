@@ -1,4 +1,4 @@
-package com.v41.tp1;
+package Game;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
