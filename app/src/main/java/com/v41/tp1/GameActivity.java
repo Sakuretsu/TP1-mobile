@@ -13,14 +13,16 @@ import Game.ColorItem;
 
 public class GameActivity extends AppCompatActivity {
 
+    //BEN_CORRECTION : Visibilités manquantes.
     Button[] colorButtons;
-    ImageView view;
+    ImageView view; //BEN_CORRECTION : View ? View de quoi ? AH ? C'est ta puce de couleur! Précise le dans le nom. Genre "colorCircleView".
 
     ColorGame game;
 
     MediaPlayer correctAnswerSoundPlayer;
     MediaPlayer incorrectAnswerSoundPlayer;
 
+    //BEN_REVIEW : Préfère placer les constantes en tout premier, en haut.
     private final String CORRECT_ANSWER = "CORRECT_ANSWER";
     private final String CORRECT_BUTTON_INDEX = "CORRECT_BUTTON_INDEX";
     private final String COLOR_DISPLAY_NAMES = "COLOR_DISPLAY_NAMES";
@@ -41,6 +43,8 @@ public class GameActivity extends AppCompatActivity {
         colorButtons[2] = (Button)findViewById(R.id.button3);
         colorButtons[3] = (Button)findViewById(R.id.button4);
 
+        //BEN_CORRECTION : Méthode statique appelée dans un contexte non statique. De plus, "correctAnswerSoundPlayer" est null à ce momment là,
+        //                 mais à cause que c'est une méthode statique, tu n'as pas de "NullPointerException".
         correctAnswerSoundPlayer = correctAnswerSoundPlayer.create(this.getApplicationContext(),R.raw.good_ping);
         incorrectAnswerSoundPlayer = incorrectAnswerSoundPlayer.create(this.getApplicationContext(),R.raw.wrong_ping);
         for (final Button button : colorButtons) {
@@ -77,13 +81,21 @@ public class GameActivity extends AppCompatActivity {
         UpdateButtonTextAndColor();
     }
 
+    //BEN_CORRECTION : En Java, les méthodes commence normalement par une minuscule. À ne pas mélanger avec le C#.
     private void UpdateButtonTextAndColor(){
         for (int i = 0; i< colorButtons.length; i++){
-            colorButtons[i].setTextColor(ContextCompat.getColor(this,game.getColorItems()[i].getColor()));
+            //BEN_CORRECTION : C'est pour cela que les couleurs n'étaient pas correctes. J'ai mis en comemntaires ce que tu avais écrit et juste en dessous
+            //                 ce que tu aurait du écrire.
+
+            //colorButtons[i].setTextColor(ContextCompat.getColor(this,game.getColorItems()[i].getColor()));
+            colorButtons[i].setTextColor(ContextCompat.getColor(this,game.getDisplayedColors()[i]));
+
             colorButtons[i].setText(game.getColorItems()[i].getName());
         }
         view.setBackgroundTintList(getColorStateList(game.getColorToFind()));
     }
+
+    //BEN_CORRECTION : Identation + Méthode vide.
     @Override
     protected void onStart() {
         super.onStart();

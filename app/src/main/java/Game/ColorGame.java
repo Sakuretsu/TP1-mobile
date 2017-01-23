@@ -41,6 +41,10 @@ public class ColorGame {
         this.displayedColors = displayedColors;
     }
 
+    //BEN_CORRECTION : Tu ne t'en sert pas, sauf dans "onSaveInstanceState". C'est pour cela que le texte et sa couleur correspondent. Tu as tout un bloc
+    //                 de logique applicative que tu ne te sert pas dams "GameActivity".
+    //
+    //                Voir "GameActivity", je l'ai corrigé. Tu en était à une ligne près.
     public int[] getColorDisplayNames() {
         return colorDisplayNames;
     }
@@ -72,6 +76,7 @@ public class ColorGame {
 
     public void startNewGame(){
         Collections.shuffle(Arrays.asList(colorItems));
+        //BEN_CORRECTION : Nommage...nommage...nommage... « rn » n'est pas un nom approprié.
         Random rn = new Random();
         for(int i = 0; i<colorDisplayNames.length; i++){
             colorDisplayNames[i] = colorItems[i].getName();
